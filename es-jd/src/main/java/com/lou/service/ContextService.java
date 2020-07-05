@@ -11,6 +11,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.search.SearchHit;
@@ -71,6 +72,7 @@ public class ContextService {
 //        TermQueryBuilder termQueryBuilder=new TermQueryBuilder("name",keyWord);
         MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("name", keyWord);
         searchSourceBuilder.query(matchQueryBuilder);
+        searchSourceBuilder.timeout(new TimeValue(3000));
 //        高亮
         HighlightBuilder highlightBuilder=new HighlightBuilder();
         highlightBuilder.field("name");//指定哪个的属性高亮
